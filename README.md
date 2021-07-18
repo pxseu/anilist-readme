@@ -6,6 +6,21 @@
 
 This was made by a person who uses primarly TypeScript and I do not know how to use Python.
 
+## How to
+
+Simply add this to your README.md
+
+```
+# My recent AniList activity
+
+<!-- ANILIST_ACTIVITY:start -->
+<!-- ANILIST_ACTIVITY:end -->
+```
+
+and setup the workflow (soon...)
+
+## Example:
+
 <!-- ANILIST_ACTIVITY:start -->
 
 -   📺 Watched episode 3 of [Girlfriend, Girlfriend](https://anilist.co/anime/126192) (02:35, 17 July 2021)
