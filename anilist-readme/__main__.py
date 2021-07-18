@@ -11,6 +11,7 @@ if __name__ == "__main__":
     max_post_count = int(getActionsInput("MAX_POST_COUNT") or "5")
     readme_path = getActionsInput("README_PATH") or "./README.md"
     commit_message = getActionsInput("COMMIT_MESSAGE") or "Update readme"
+    gh_token = getActionsInput("GH_TOKEN", False)
 
     info(f"""Fetching Anilist data for user {user_id}
         with preffered langauge '{preferred_language}'""")
@@ -23,4 +24,4 @@ if __name__ == "__main__":
 
     readme = open_readme(readme_path)
     update_readme(readme, readme_path, parsed)
-    git_add_commit_push(readme_path, commit_message)
+    git_add_commit_push(readme_path, commit_message, gh_token)

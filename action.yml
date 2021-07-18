@@ -40,6 +40,13 @@ runs:
           run: |
               python ${{ github.action_path }}/anilist-readme
           shell: bash
+          env:
+              INPUT_USER_ID: ${{ inputs.user_id }}
+              INPUT_PREFERRED_LANGUAGE: ${{ inputs.preferred_language }}
+              INPUT_MAX_POST_COUNT: ${{ inputs.max_post_count }}
+              INPUT_README_PATH: ${{ inputs.readme_path }}
+              INPUT_COMMIT_MESSAGE: ${{ inputs.commit_message }}
+              INPUT_GH_TOKEN: ${{ inputs.gh_token }}
 
 branding:
     icon: "activity"
