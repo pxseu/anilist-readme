@@ -28,6 +28,16 @@ inputs:
         default: "Update AniList activity in README.md"
         required: false
 
+    commit_username:
+        description: "The username of the commiter"
+        default: "GitHub Action"
+        required: false
+
+    commit_email:
+        description: "Email address of the commiter"
+        default: "action@github.com"
+        required: false
+
 runs:
     using: "composite"
     steps:
@@ -47,6 +57,8 @@ runs:
               INPUT_README_PATH: ${{ inputs.readme_path }}
               INPUT_COMMIT_MESSAGE: ${{ inputs.commit_message }}
               INPUT_GH_TOKEN: ${{ inputs.gh_token }}
+              INPUT_COMMIT_EMAIL: ${{ inputs.commit_email }}
+              INPUT_COMMIT_USERNAME: ${{ inputs.commit_username }}
 
 branding:
     icon: "activity"
