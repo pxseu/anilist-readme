@@ -16,7 +16,7 @@ class ListActivity():
             activity_data['createdAt']).strftime('%H:%M, %d %B %Y')
         self.progress: str = activity_data['progress']
         self.status: str = activity_data['status']
-        self.title: str = activity_data["media"]['title'][preffered_lang if preffered_lang else 'english']
+        self.title: str = activity_data["media"]['title'][preffered_lang or 'english']
         self.url: str = activity_data["media"]['siteUrl']
 
     def __str__(self) -> str:

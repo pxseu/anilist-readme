@@ -26,3 +26,4 @@ EMOJI_DICT = {
 }
 
 COMMENT_TEMPLATE = "<!-- ANILIST_ACTIVITY:{} -->"
+CMD_STR = "::"

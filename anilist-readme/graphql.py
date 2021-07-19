@@ -1,5 +1,5 @@
-from config import ANILIST_ENDPOINT
 import requests
+from config import ANILIST_ENDPOINT
 
 
 def grapql(query: str, variables: "dict[str]" = None) -> dict:
