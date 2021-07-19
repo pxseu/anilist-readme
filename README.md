@@ -10,30 +10,66 @@ This was made by a person who uses primarly TypeScript and I do not know how to 
 
 Simply add this to your README.md
 
-```
-# My recent AniList activity
+```html
+# 🌸 My recent AniList activity
 
 <!-- ANILIST_ACTIVITY:start -->
-
--   📺 Watched episode 3 of [Girlfriend, Girlfriend](https://anilist.co/anime/126192) (02:35, 17 July 2021)
--   📖 Read chapter 13 of [Chainsaw Man](https://anilist.co/manga/105778) (01:58, 17 July 2021)
--   📺 Watched episode 71 - 86 of [Naruto: Shippuden](https://anilist.co/anime/1735) (21:47, 16 July 2021)
--   📖 Read chapter 1 - 12 of [Chainsaw Man](https://anilist.co/manga/105778) (04:03, 16 July 2021)
--   📺 Watched episode 65 - 70 of [Naruto: Shippuden](https://anilist.co/anime/1735) (23:23, 15 July 2021)
 
 <!-- ANILIST_ACTIVITY:end -->
 ```
 
-and setup the workflow (soon...)
+and setup the workflow like this:
 
-## Example:
+```yml
+name: AniList readme workflow
+on:
+    schedule:
+        # Runs every hour
+        - cron: "0 * * * *"
+    workflow_dispatch:
 
-<!-- ANILIST_ACTIVITY:start -->
+jobs:
+    update-readme-with-anilist:
+        name: Update this repo's README with latest AniList activites
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: AniList readme workflow
+              uses: pxseu/anilist-readme@v1.1.5
+              with:
+                  user_id: YOUR_USER_ID
+```
 
--   📺 Watched episode 3 of [Girlfriend, Girlfriend](https://anilist.co/anime/126192) (02:35, 17 July 2021)
--   📖 Read chapter 13 of [Chainsaw Man](https://anilist.co/manga/105778) (01:58, 17 July 2021)
--   📺 Watched episode 71 - 86 of [Naruto: Shippuden](https://anilist.co/anime/1735) (21:47, 16 July 2021)
--   📖 Read chapter 1 - 12 of [Chainsaw Man](https://anilist.co/manga/105778) (04:03, 16 July 2021)
--   📺 Watched episode 65 - 70 of [Naruto: Shippuden](https://anilist.co/anime/1735) (23:23, 15 July 2021)
+## Settings
 
-<!-- ANILIST_ACTIVITY:end -->
+| Option            | Description                                         | Default                                | Required |
+| ----------------- | --------------------------------------------------- | -------------------------------------- | -------- |
+| `user_id`         | Your AniList user id                                | ""                                     | `True`   |
+| `gh_token`        | Auhtorized github token                             | ${{ github.token }}                    | `False`  |
+| `readme_path`     | Path to the readme file to edit                     | "./README.md"                          | `False`  |
+| `max_post_count`  | A number from 1 to 50 limiting the ammount of posts | "5"                                    | `False`  |
+| `commit_message`  | A message to use when commiting                     | "Update AniList activity in README.md" | `False`  |
+| `commit_username` | The username for the commiter                       | "GitHub Action"                        | `False`  |
+| `commit_email`    | The email for the commiter                          | "action@github.com"                    | `False`  |
+
+> Note: I reccomend you leave the default `commit_username` and `commit_email` \
+> If you're unsure what's your User ID on AniList follow the quide bellow
+
+## How the get my user id
+
+Head on over to https://anilist.co/graphiql and input the query bellow and replacing `YOUR_USERNAME` with your username.
+
+```gql
+query {
+	User(name: "YOUR_USERNAME") {
+		id
+		name
+	}
+}
+```
+
+The query above will return your user id and then you can use easily put it in to the action!
+
+## Example
+
+You can find it on my [profile](https://github.com/pxseu/pxseu/blob/a2980f3165f0ed86d5469ee35b8ff38e12116794/README.md)!
