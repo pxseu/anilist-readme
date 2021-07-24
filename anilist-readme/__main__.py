@@ -6,16 +6,22 @@ from readme_actions import open_readme, update_readme
 from git import git_add_commit_push
 
 
-def main(user_id: str, preferred_language: str, max_post_count: str, readme_path: str,
-         commit_message: str, gh_token: str, commit_email: str, commit_username: str):
+def main(
+    user_id: str,
+    preferred_language: str,
+    max_post_count: str,
+    readme_path: str,
+    commit_message: str,
+    gh_token: str,
+    commit_email: str,
+    commit_username: str,
+):
     info(f"Fetching Anilist data for user {user_id}")
     info(f"with preffered langauge '{preferred_language}'")
-    response = grapql(ANILIST_QUERY, {"id": int(
-        user_id), "post_count": int(max_post_count)})
+    response = grapql(ANILIST_QUERY, {"id": int(user_id), "post_count": int(max_post_count)})
 
     info(f"Parsing the response")
-    parsed = [ListActivity(activity, preferred_language)
-              for activity in response["data"]["Page"]["activities"]]
+    parsed = [ListActivity(activity, preferred_language) for activity in response["data"]["Page"]["activities"]]
 
     info(f"Opening readme in '{readme_path}'")
     readme = open_readme(readme_path)
@@ -25,8 +31,7 @@ def main(user_id: str, preferred_language: str, max_post_count: str, readme_path
 
     info(f"Commiting the changes")
     add_secret(gh_token)
-    git_add_commit_push(readme_path, commit_message,
-                        gh_token, commit_email, commit_username)
+    git_add_commit_push(readme_path, commit_message, gh_token, commit_email, commit_username)
 
 
 if __name__ == "__main__":
@@ -39,5 +44,13 @@ if __name__ == "__main__":
     commit_email = getActionsInput("COMMIT_EMAIL", False)
     commit_username = getActionsInput("COMMIT_USERNAME", False)
 
-    main(user_id, preferred_language, max_post_count, readme_path,
-         commit_message, gh_token, commit_email, commit_username)
+    main(
+        user_id,
+        preferred_language,
+        max_post_count,
+        readme_path,
+        commit_message,
+        gh_token,
+        commit_email,
+        commit_username,
+    )

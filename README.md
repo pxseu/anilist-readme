@@ -1,10 +1,14 @@
 # AniList readme workflow
 
-> Simple workflow that will add your latests activity into your readme!
+> Simple workflow that will add your latest activity into your readme!
+
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/0-percent-optimized.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/it-works-why.svg)](https://forthebadge.com)
 
 ## Note
 
-This was made by a person who uses primarly TypeScript and I do not know how to use Python.
+This was made by a person who uses primarly TypeScript which does not know how to use Python.
 
 ## How to
 
@@ -52,7 +56,7 @@ jobs:
 | `commit_username` | The username for the commiter                       | "GitHub Action"                        | `False`  |
 | `commit_email`    | The email for the commiter                          | "action@github.com"                    | `False`  |
 
-> Note: I reccomend you leave the default `commit_username` and `commit_email` \
+> Note: I recommend you leave the default `commit_username` and `commit_email` \
 > If you're unsure what's your User ID on AniList follow the quide bellow
 
 ## How the get my user id
@@ -68,7 +72,7 @@ query {
 }
 ```
 
-The query above will return your user id and then you can use easily put it in to the action!
+Above query will return you your username next to your id with which you can use this action.
 
 ## Example
 

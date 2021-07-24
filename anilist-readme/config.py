@@ -20,10 +20,7 @@ ANILIST_QUERY = """query ($id: Int, $post_count: Int) {
     }
 }"""
 
-EMOJI_DICT = {
-    "MANGA_LIST": "📖",
-    "ANIME_LIST": "📺"
-}
+EMOJI_DICT = {"MANGA_LIST": "📖", "ANIME_LIST": "📺"}
 
 COMMENT_TEMPLATE = "<!-- ANILIST_ACTIVITY:{} -->"
 CMD_STR = "::"
