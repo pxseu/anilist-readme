@@ -8,7 +8,7 @@
 
 ## Note
 
-This was made by a person who uses primarly TypeScript which does not know how to use Python.
+This was made by a person who primarily uses TypeScript and doesn't know how to use Python.
 
 ## How to
 
@@ -49,7 +49,7 @@ jobs:
 | Option            | Description                                         | Default                                | Required |
 | ----------------- | --------------------------------------------------- | -------------------------------------- | -------- |
 | `user_id`         | Your AniList user id                                | ""                                     | `True`   |
-| `gh_token`        | Auhtorized github token                             | ${{ github.token }}                    | `False`  |
+| `gh_token`        | Authorized github token                             | ${{ github.token }}                    | `False`  |
 | `readme_path`     | Path to the readme file to edit                     | "./README.md"                          | `False`  |
 | `max_post_count`  | A number from 1 to 50 limiting the ammount of posts | "5"                                    | `False`  |
 | `commit_message`  | A message to use when commiting                     | "Update AniList activity in README.md" | `False`  |
@@ -57,11 +57,11 @@ jobs:
 | `commit_email`    | The email for the commiter                          | "action@github.com"                    | `False`  |
 
 > Note: I recommend you leave the default `commit_username` and `commit_email` \
-> If you're unsure what's your User ID on AniList follow the quide bellow
+> If you're unsure what's your User ID on AniList follow the quide below
 
-## How the get my user id
+## How to get my user id
 
-Head on over to https://anilist.co/graphiql and input the query bellow and replacing `YOUR_USERNAME` with your username.
+Head on over to https://anilist.co/graphiql and input the query below and replace `YOUR_USERNAME` with your username.
 
 ```gql
 query {
@@ -72,7 +72,7 @@ query {
 }
 ```
 
-Above query will return you your username next to your id with which you can use this action.
+The query above will return your username and your id which you can use for this action.
 
 ## Example
 
