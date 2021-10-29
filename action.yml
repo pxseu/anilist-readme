@@ -10,17 +10,17 @@ inputs:
 
     gh_token:
         description: "GitHub access token with Repo scope"
-        required: false
         default: ${{ github.token }}
+        required: false
 
     readme_path:
         description: "Path of the readme file you want to update"
-        default: "./README.md"
+        default: ""
         required: false
 
     max_post_count:
         description: "Maximum number of activites you want to show on your readme"
-        default: "5"
+        default: 5
         required: false
 
     commit_message:
@@ -37,6 +37,10 @@ inputs:
         description: "Email address of the commiter"
         default: "action@github.com"
         required: false
+    preferred_language:
+        description: "Preffered language of the list content"
+        default: "english"
+        required: true
 
 runs:
     using: "composite"
@@ -48,7 +52,7 @@ runs:
           shell: bash
         - name: Run the script
           run: |
-              python ${{ github.action_path }}/anilist-readme
+              python ${{ github.action_path }}/
           shell: bash
           env:
               INPUT_USER_ID: ${{ inputs.user_id }}
