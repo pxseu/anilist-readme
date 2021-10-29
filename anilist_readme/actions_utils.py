@@ -1,16 +1,16 @@
-import os
+from os import environ
 import json
 from typing import Union
-from config import CMD_STR
+from .config import CMD_STR
 
 
-def getActionsInput(value: str, optional: bool = True) -> Union[str, None]:
+def actionsInput(value: str, optional: bool = True) -> Union[str, None]:
     # remove all spaces to undersocres
     value = value.replace(" ", "_")
 
     # get the value in uppercase from env prefixed with INPUT_
     try:
-        return os.environ[f"INPUT_{value.upper()}"]
+        return environ[f"INPUT_{value.upper()}"]
     except:
         if optional:
             return None
@@ -20,6 +20,10 @@ def getActionsInput(value: str, optional: bool = True) -> Union[str, None]:
 
 def info(msg: str) -> None:
     print(f"[INFO] {msg}")
+
+
+def error(msg: str) -> None:
+    print(f"[ERROR] {msg}")
 
 
 def add_secret(secret: str) -> None:

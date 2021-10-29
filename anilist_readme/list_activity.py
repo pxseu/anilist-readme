@@ -1,16 +1,21 @@
 from typing import Literal
-from config import EMOJI_DICT
+from .config import EMOJI_DICT
 from datetime import datetime
 
 prefferd_lang_type = Literal["romaji", "english", "native"]
 prefferd_lang_tuple = ("romaji", "english", "native")
 
 
+def validLanguage(lang: str):
+    """
+    Check if the language is valid.
+    """
+    if lang not in prefferd_lang_tuple:
+        raise ValueError(f"'{lang}'' is not a valid language. Must be: '{', '.join(prefferd_lang_tuple)}'")
+
+
 class ListActivity:
     def __init__(self, activity_data: dict, preffered_lang: prefferd_lang_type = None) -> None:
-        if preffered_lang not in prefferd_lang_tuple:
-            raise Exception(f"{preffered_lang} is not a valid language")
-
         self.type: str = activity_data["type"]
         self.created_at = datetime.utcfromtimestamp(activity_data["createdAt"]).strftime("%H:%M, %d %B %Y")
         self.progress: str = activity_data["progress"]
