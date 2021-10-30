@@ -41,7 +41,7 @@ def update_readme(readme_content: "list[str]", readme_path: str, activity_list: 
     """
     Update the readme file with the given contents.
     """
-    info(f"Updating the readme contents")
+    info("Updating the readme contents")
 
     if environ.get("DEV") == "true":
         # if we are in dev mode, we don't commit

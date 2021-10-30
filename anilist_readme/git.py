@@ -6,7 +6,7 @@ from .actions_utils import info
 
 def git_add_commit_push(readme_path: str, message: str, gh_token: str, email: str, username: str) -> None:
     # commit the change and push to your repo
-    info(f"Commiting the changes")
+    info("Commiting the changes")
 
     if environ.get("DEV") == "true":
         # if we are in dev mode, we don't commit
@@ -17,4 +17,4 @@ def git_add_commit_push(readme_path: str, message: str, gh_token: str, email: st
     system(f"git remote set-url origin https://{gh_token}@github.com/{environ['GITHUB_REPOSITORY']}.git")
     system(f"git add {readme_path}")
     system(f"git commit -m  {quote(message)}")
-    system(f"git push")
+    system("git push")
