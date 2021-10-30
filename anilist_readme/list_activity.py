@@ -1,28 +1,34 @@
-from typing import Literal
 from datetime import datetime
+from enum import auto, Enum
 
 from .config import EMOJI_DICT
 
-preferred_lang_type = Literal["romaji", "english", "native"]
-preferred_lang_tuple = ("romaji", "english", "native")
+
+class Language(Enum):
+    romanji = auto()
+    english = auto()
+    native = auto()
 
 
-def valid_language(lang: str):
+def validate_language(lang: str) -> Language:
     """
     Check if the language is valid.
     """
-    if lang not in preferred_lang_tuple:
-        raise ValueError(f"'{lang}'' is not a valid language. Must be: '{', '.join(preferred_lang_tuple)}'")
+    languages = [x.name for x in Language]
+    if lang in languages:
+        return Language[lang]
+    raise ValueError(f"'{lang}'' is not a valid language. Must be: '{', '.join(languages)}'")
 
 
 class ListActivity:
-    def __init__(self, activity_data: dict, preferred_lang: preferred_lang_type = None) -> None:
+    def __init__(self, activity_data: dict, preferred_lang: Language = None) -> None:
         self.type: str = activity_data["type"]
         self.created_at = datetime.utcfromtimestamp(activity_data["createdAt"]).strftime("%H:%M, %d %B %Y")
         self.progress: str = activity_data["progress"]
         self.status: str = activity_data["status"]
         self.title: str = (
-                activity_data["media"]["title"][preferred_lang or "english"] or activity_data["media"]["title"]["romaji"]
+                activity_data["media"]["title"][preferred_lang.name or "english"] or
+                activity_data["media"]["title"]["romaji"]
         )
         self.url: str = activity_data["media"]["siteUrl"]
 
