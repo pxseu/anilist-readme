@@ -4,7 +4,7 @@ from typing import Union
 from .config import CMD_STR
 
 
-def actionsInput(value: str, optional: bool = True) -> Union[str, None]:
+def actions_input(value: str, optional: bool = True) -> Union[str, None]:
     # remove all spaces to undersocres
     value = value.replace(" ", "_")
 
@@ -27,10 +27,10 @@ def error(msg: str) -> None:
 
 
 def add_secret(secret: str) -> None:
-    print(f"{CMD_STR}add-mask{CMD_STR}{escapeData(secret)}")
+    print(f"{CMD_STR}add-mask{CMD_STR}{escape_data(secret)}")
 
 
-def escapeData(data: str) -> str:
+def escape_data(data: str) -> str:
     data = json.dumps(data)
     data = data.replace("%", "%25")
     data = data.replace("\n", "%0A")

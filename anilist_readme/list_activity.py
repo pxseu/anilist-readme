@@ -1,12 +1,13 @@
 from typing import Literal
-from .config import EMOJI_DICT
 from datetime import datetime
+
+from .config import EMOJI_DICT
 
 prefferd_lang_type = Literal["romaji", "english", "native"]
 prefferd_lang_tuple = ("romaji", "english", "native")
 
 
-def validLanguage(lang: str):
+def valid_language(lang: str):
     """
     Check if the language is valid.
     """

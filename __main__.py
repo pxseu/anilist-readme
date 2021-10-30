@@ -1,7 +1,7 @@
 from anilist_readme.graphql import grapql
 from anilist_readme.config import ANILIST_QUERY
-from anilist_readme.actions_utils import actionsInput, add_secret
-from anilist_readme.list_activity import ListActivity, validLanguage
+from anilist_readme.actions_utils import actions_input, add_secret
+from anilist_readme.list_activity import ListActivity, valid_language
 from anilist_readme.readme_actions import find_readme, open_readme, update_readme
 from anilist_readme.git import git_add_commit_push
 
@@ -16,7 +16,7 @@ def main(
     commit_email: str,
     commit_username: str,
 ):
-    validLanguage(preferred_language)
+    valid_language(preferred_language)
 
     response = grapql(ANILIST_QUERY, {"id": int(user_id), "post_count": int(max_post_count)})
     parsed = [ListActivity(activity, preferred_language) for activity in response["data"]["Page"]["activities"]]
@@ -27,14 +27,14 @@ def main(
 
 
 if __name__ == "__main__":
-    user_id: str = actionsInput("USER_ID", False)
-    preferred_language = actionsInput("PREFERRED_LANGUAGE", False)
-    max_post_count = int(actionsInput("MAX_POST_COUNT", False))
-    readme_path = actionsInput("README_PATH") or find_readme()
-    commit_message = actionsInput("COMMIT_MESSAGE", False)
-    gh_token = actionsInput("GH_TOKEN", False)
-    commit_email = actionsInput("COMMIT_EMAIL", False)
-    commit_username = actionsInput("COMMIT_USERNAME", False)
+    user_id: str = actions_input("USER_ID", False)
+    preferred_language = actions_input("PREFERRED_LANGUAGE", False)
+    max_post_count = int(actions_input("MAX_POST_COUNT", False))
+    readme_path = actions_input("README_PATH") or find_readme()
+    commit_message = actions_input("COMMIT_MESSAGE", False)
+    gh_token = actions_input("GH_TOKEN", False)
+    commit_email = actions_input("COMMIT_EMAIL", False)
+    commit_username = actions_input("COMMIT_USERNAME", False)
 
     main(
         user_id,
