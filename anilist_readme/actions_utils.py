@@ -5,7 +5,7 @@ from .config import CMD_STR
 
 
 def actions_input(value: str, optional: bool = True) -> Union[str, None]:
-    # remove all spaces to undersocres
+    # remove all spaces to underscores
     value = value.replace(" ", "_")
 
     # get the value in uppercase from env prefixed with INPUT_

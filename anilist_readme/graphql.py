@@ -1,5 +1,6 @@
 import httpx
 from time import sleep
+
 from .actions_utils import error, info
 from .config import ANILIST_ENDPOINT
 
@@ -11,7 +12,7 @@ def grapql(query: str, variables: "dict[str]" = None, retry: int = 5, delay: flo
     """
     info("Making a POST request to ANILIST_ENDPOINT")
 
-    # make the requets
+    # make the requests
     res = httpx.post(ANILIST_ENDPOINT, json={"query": query, "variables": variables})
 
     if res.is_error:

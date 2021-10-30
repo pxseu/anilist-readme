@@ -49,16 +49,16 @@ def update_readme(readme_content: "list[str]", readme_path: str, activity_list: 
 
     indexes = readme_comment_indexes(readme_content)
     top_part = "\n".join(readme_content[: (indexes[0] + 1)])
-    bottom_part = "\n".join(readme_content[indexes[1] :])
+    bottom_part = "\n".join(readme_content[indexes[1]:])
 
     with open(readme_path, "w") as file:
         new_content = (
-            top_part
-            + "\n\n"
-            + "\n".join(map(lambda activity: str(activity), activity_list))
-            + "\n\n"
-            + bottom_part
-            + "\n"
+                top_part
+                + "\n\n"
+                + "\n".join(map(lambda activity: str(activity), activity_list))
+                + "\n\n"
+                + bottom_part
+                + "\n"
         )
         file.write(new_content)
 

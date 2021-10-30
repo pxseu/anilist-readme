@@ -6,7 +6,7 @@ from .actions_utils import info
 
 def git_add_commit_push(readme_path: str, message: str, gh_token: str, email: str, username: str) -> None:
     # commit the change and push to your repo
-    info("Commiting the changes")
+    info("Committing the changes")
 
     if environ.get("DEV") == "true":
         # if we are in dev mode, we don't commit
