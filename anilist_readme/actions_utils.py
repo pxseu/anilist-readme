@@ -1,3 +1,4 @@
+from .logger import logger
 import json
 from os import environ
 from typing import Optional
@@ -11,6 +12,8 @@ def actions_input(value: str, optional: bool) -> Optional[str]:
 
     # get the value in uppercase from env prefixed with INPUT_
     output = environ.get(f"INPUT_{value.upper()}", default=None)
+
+    logger.debug(f"actions_input: {value}={output}")
 
     if output or optional:
         return output

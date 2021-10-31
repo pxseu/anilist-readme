@@ -9,6 +9,7 @@ def git_add_commit_push(readme_path: str, message: str, gh_token: str, email: st
     logger.info("Committing the changes")
 
     if environ.get("DEV") == "true":
+        logger.debug("Skipping git commit and push due to DEV=true")
         # if we are in dev mode, we don't commit
         return
 

@@ -1,24 +1,28 @@
-import pathlib
-from os import environ
+from os import environ, walk, path
 
 from .logger import logger
 from .config import COMMENT_TEMPLATE
 from .list_activity import ListActivity
 
 
-def find_readme() -> str:
+def find_readme():
     """
     Find the readme file in the given current directory.
     """
     logger.info("Searching for the readme file...")
+    readme_path = None
 
-    path = pathlib.Path(".")
-    files = list(path.rglob("readme.*"))
+    for root, dirs, files in walk("."):
+        for file in files:
+            if file.lower() == "readme.md":
+                readme_path = path.join(root, file)
+                break
 
-    if files:
-        return str(files[0])
-
-    raise FileNotFoundError("Unable to find readme file.")
+    if readme_path:
+        logger.info(f"Found readme file at: '{readme_path}'")
+        return readme_path
+    else:
+        raise FileNotFoundError("Unable to find readme file.")
 
 
 def open_readme(readme: str) -> "list[str]":
@@ -43,17 +47,17 @@ def update_readme(readme_content: "list[str]", readme_path: str, activity_list: 
         return
 
     start_index, end_index = readme_comment_indexes(readme_content)
-    top_part = "\n".join(readme_content[:start_index + 1])
+    top_part = "\n".join(readme_content[: start_index + 1])
     bottom_part = "\n".join(readme_content[end_index:])
 
     with open(readme_path, "w") as file:
         new_content = (
-                top_part
-                + "\n\n"
-                + "\n".join(map(lambda activity: str(activity), activity_list))
-                + "\n\n"
-                + bottom_part
-                + "\n"
+            top_part
+            + "\n\n"
+            + "\n".join(map(lambda activity: str(activity), activity_list))
+            + "\n\n"
+            + bottom_part
+            + "\n"
         )
         file.write(new_content)
 

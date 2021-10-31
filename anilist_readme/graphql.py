@@ -16,6 +16,8 @@ def grapql(query: str, variables: "dict[str]" = None, retry: int = 5, delay: flo
     # make the requests
     res = httpx.post(ANILIST_ENDPOINT, json={"query": query, "variables": variables})
 
+    logger.debug(f"Response status: {res.status_code}")
+
     if not res.is_error:
         return res.json()
 
