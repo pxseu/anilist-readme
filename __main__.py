@@ -2,7 +2,7 @@ from anilist_readme.actions_utils import actions_input, add_secret
 from anilist_readme.config import ANILIST_QUERY
 from anilist_readme.git import git_add_commit_push
 from anilist_readme.graphql import grapql
-from anilist_readme.list_activity import ListActivity, validate_language, Language
+from anilist_readme.list_activity import ListActivity, validate_language
 from anilist_readme.readme_actions import find_readme, open_readme, update_readme
 
 

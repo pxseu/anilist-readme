@@ -2,7 +2,7 @@ from time import sleep
 
 import httpx
 
-from .actions_utils import error, info
+from .logger import logger
 from .config import ANILIST_ENDPOINT
 
 
@@ -11,7 +11,7 @@ def grapql(query: str, variables: "dict[str]" = None, retry: int = 5, delay: flo
     Makes a graphql request to the ANILIST_ENDPOINT, and returns the response.
     Uses query and variables in body
     """
-    info("Making a POST request to ANILIST_ENDPOINT")
+    logger.info("Making a POST request to ANILIST_ENDPOINT")
 
     # make the requests
     res = httpx.post(ANILIST_ENDPOINT, json={"query": query, "variables": variables})
@@ -26,7 +26,7 @@ def grapql(query: str, variables: "dict[str]" = None, retry: int = 5, delay: flo
     # if the request is not ok, retry
     # wait for a while
     sleep(delay)
-    error(f"Error making graphql request: {res.status_code}, tries left: {retry}")
+    logger.error(f"Error making graphql request: {res.status_code}, tries left: {retry}")
 
     # retry
     return grapql(

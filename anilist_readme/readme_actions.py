@@ -1,7 +1,7 @@
 import pathlib
 from os import environ
 
-from .actions_utils import info
+from .logger import logger
 from .config import COMMENT_TEMPLATE
 from .list_activity import ListActivity
 
@@ -10,7 +10,7 @@ def find_readme() -> str:
     """
     Find the readme file in the given current directory.
     """
-    info("Searching for the readme file...")
+    logger.info("Searching for the readme file...")
 
     path = pathlib.Path(".")
     files = list(path.rglob("readme.*"))
@@ -25,7 +25,7 @@ def open_readme(readme: str) -> "list[str]":
     """
     Open the readme file and return the contents as a string.
     """
-    info(f"Opening readme in '{readme}'")
+    logger.info(f"Opening readme in '{readme}'")
 
     with open(readme, "r") as file:
         opened = file.read()
@@ -36,7 +36,7 @@ def update_readme(readme_content: "list[str]", readme_path: str, activity_list: 
     """
     Update the readme file with the given contents.
     """
-    info("Updating the readme contents")
+    logger.info("Updating the readme contents")
 
     if environ.get("DEV") == "true":
         # if we are in dev mode, we don't commit

@@ -18,14 +18,6 @@ def actions_input(value: str, optional: bool) -> Optional[str]:
     raise ValueError(f"{value} is required")
 
 
-def info(msg: str) -> None:
-    print(f"[INFO] {msg}")
-
-
-def error(msg: str) -> None:
-    print(f"[ERROR] {msg}")
-
-
 def add_secret(secret: str) -> None:
     print(f"{CMD_STR}add-mask{CMD_STR}{escape_data(secret)}")
 

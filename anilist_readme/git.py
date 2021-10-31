@@ -1,12 +1,12 @@
 from os import environ, system
 from shlex import quote
 
-from .actions_utils import info
+from .logger import logger
 
 
 def git_add_commit_push(readme_path: str, message: str, gh_token: str, email: str, username: str) -> None:
     # commit the change and push to your repo
-    info("Committing the changes")
+    logger.info("Committing the changes")
 
     if environ.get("DEV") == "true":
         # if we are in dev mode, we don't commit
