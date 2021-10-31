@@ -1,36 +1,28 @@
-from os import environ
 import json
-from typing import Union
+from os import environ
+from typing import Optional
+
 from .config import CMD_STR
 
 
-def actionsInput(value: str, optional: bool = True) -> Union[str, None]:
-    # remove all spaces to undersocres
+def actions_input(value: str, optional: bool) -> Optional[str]:
+    # remove all spaces to underscores
     value = value.replace(" ", "_")
 
     # get the value in uppercase from env prefixed with INPUT_
-    try:
-        return environ[f"INPUT_{value.upper()}"]
-    except:
-        if optional:
-            return None
-        else:
-            raise ValueError(f"{value} is required")
+    output = environ.get(f"INPUT_{value.upper()}", default=None)
 
+    if output or optional:
+        return output
 
-def info(msg: str) -> None:
-    print(f"[INFO] {msg}")
-
-
-def error(msg: str) -> None:
-    print(f"[ERROR] {msg}")
+    raise ValueError(f"{value} is required")
 
 
 def add_secret(secret: str) -> None:
-    print(f"{CMD_STR}add-mask{CMD_STR}{escapeData(secret)}")
+    print(f"{CMD_STR}add-mask{CMD_STR}{escape_data(secret)}")
 
 
-def escapeData(data: str) -> str:
+def escape_data(data: str) -> str:
     data = json.dumps(data)
     data = data.replace("%", "%25")
     data = data.replace("\n", "%0A")
