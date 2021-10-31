@@ -10,7 +10,7 @@ def actions_input(value: str, optional: bool) -> Optional[str]:
     value = value.replace(" ", "_")
 
     # get the value in uppercase from env prefixed with INPUT_
-    output = environ.get(f"INPUT_{value.upper()})", default=None)
+    output = environ.get(f"INPUT_{value.upper()}", default=None)
 
     if output or optional:
         return output
