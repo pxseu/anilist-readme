@@ -1,3 +1,4 @@
+from cmath import log
 from os import environ, walk, path
 
 from .logger import logger
@@ -12,14 +13,16 @@ def find_readme():
     logger.info("Searching for the readme file...")
     readme_path = None
 
-    for root, dirs, files in walk("."):
+    for root, _, files in walk(".", topdown=True):
         for file in files:
             if file.lower() == "readme.md":
-                readme_path = path.join(root, file)
-                break
+                local_readme_path = path.join(root, file)
+
+                if validate_readme(local_readme_path):
+                    readme_path = local_readme_path
+                    logger.info(f"Found matching readme file at '{local_readme_path}'")
 
     if readme_path:
-        logger.info(f"Found readme file at: '{readme_path}'")
         return readme_path
     else:
         raise FileNotFoundError("Unable to find readme file.")
@@ -40,7 +43,7 @@ def update_readme(readme_content: "list[str]", readme_path: str, activity_list: 
     """
     Update the readme file with the given contents.
     """
-    logger.info("Updating the readme contents")
+    logger.info("Updating the readme contents...")
 
     if environ.get("DEV") == "true":
         # if we are in dev mode, we don't commit
@@ -60,6 +63,22 @@ def update_readme(readme_content: "list[str]", readme_path: str, activity_list: 
             + "\n"
         )
         file.write(new_content)
+
+
+def validate_readme(readme: "str") -> bool:
+    """
+    Validate the readme file.
+    """
+    logger.info("Validating the readme file...")
+
+    try:
+        readme_comment_indexes(open_readme(readme))
+
+    except ValueError:
+        logger.error(f"Failed to validate readme at: '{readme}'")
+        return False
+
+    return True
 
 
 def readme_comment_indexes(readme: "list[str]") -> "tuple[int, int]":
