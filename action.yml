@@ -38,7 +38,7 @@ inputs:
     required: false
 
   preferred_language:
-    description: "Preffered language of the list content"
+    description: "Preferred language of the list content"
     default: "english"
     required: false
 
