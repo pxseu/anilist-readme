@@ -39,7 +39,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: AniList readme workflow
-              uses: pxseu/anilist-readme@v1.2.1
+              uses: pxseu/anilist-readme@v1.4.2
               with:
                   user_id: YOUR_USER_ID
 ```
