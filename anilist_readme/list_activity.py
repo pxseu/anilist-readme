@@ -1,8 +1,7 @@
 from datetime import datetime, tzinfo
 from enum import auto, Enum
 from typing import Optional
-
-import pytz
+from dateutil import tz
 
 from .config import EMOJI_DICT
 
@@ -29,13 +28,13 @@ class ListActivity:
     def __init__(
         self,
         activity_data: dict,
-        tz: str,
+        timezone: str,
         preferred_lang: Language,
         format_date: str,
     ) -> None:
         self.type: str = activity_data["type"]
         self.created_at = custom_datetime_format(
-            dt=datetime.fromtimestamp(activity_data["createdAt"], pytz.timezone(tz)),
+            dt=datetime.fromtimestamp(activity_data["createdAt"], tz.gettz(timezone)),
             format_date=format_date,
         )
         self.progress: str = activity_data["progress"]
