@@ -55,8 +55,11 @@ jobs:
 | `commit_message`  | A message to use when commiting                     | "Update AniList activity in README.md" | `False`  |
 | `commit_username` | The username for the commiter                       | "GitHub Action"                        | `False`  |
 | `commit_email`    | The email for the commiter                          | "action@github.com"                    | `False`  |
+| `timezone`        | Timezone of the list content (e.g. Europe/Berlin)   | "UTC"                                  | `False`  |
+| `date_format`     | Date format of the list content (e.g. {D}/{M or MW}/{Y} {h}:{m}) | "{h}:{m} {D} {MW} {Y}"    | `False`  |
 
 > Note: I recommend you leave the default `commit_username` and `commit_email` \
+> For `date_format` months: {M} will result in a number (e.g '3') & {MW} will result in a string (e.g 'March') \
 > If you're unsure what's your User ID on AniList follow the quide below
 
 ## How to get my user id
