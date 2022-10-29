@@ -1,4 +1,5 @@
 from time import sleep
+from typing import Any, Dict, Optional, AnyStr
 
 import httpx
 
@@ -6,7 +7,12 @@ from .logger import logger
 from .config import ANILIST_ENDPOINT
 
 
-def grapql(query: str, variables: "dict[str]" = None, retry: int = 5, delay: float = 0.2) -> dict:
+def grapql(
+    query: str,
+    variables: Optional[Dict[str, Any]] = None,
+    retry: int = 5,
+    delay: float = 0.2,
+) -> dict:
     """
     Makes a graphql request to the ANILIST_ENDPOINT, and returns the response.
     Uses query and variables in body
@@ -28,7 +34,9 @@ def grapql(query: str, variables: "dict[str]" = None, retry: int = 5, delay: flo
     # if the request is not ok, retry
     # wait for a while
     sleep(delay)
-    logger.error(f"Error making graphql request: {res.status_code}, tries left: {retry}")
+    logger.error(
+        f"Error making graphql request: {res.status_code}, tries left: {retry}"
+    )
 
     # retry
     return grapql(

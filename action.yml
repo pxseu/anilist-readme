@@ -3,67 +3,77 @@ author: "pxseu"
 description: "Puts your newest activity from AniList into your readme"
 
 inputs:
-    user_id:
-        description: "Your anilist user id"
-        default: ""
-        required: true
+  user_id:
+    description: "Your anilist user id"
+    default: ""
+    required: true
 
-    gh_token:
-        description: "GitHub access token with Repo scope"
-        default: ${{ github.token }}
-        required: false
+  gh_token:
+    description: "GitHub access token with Repo scope"
+    default: ${{ github.token }}
+    required: false
 
-    readme_path:
-        description: "Path of the readme file you want to update"
-        default: ""
-        required: false
+  readme_path:
+    description: "Path of the readme file you want to update"
+    required: false
 
-    max_post_count:
-        description: "Maximum number of activites you want to show on your readme"
-        default: 5
-        required: false
+  max_post_count:
+    description: "Maximum number of activites you want to show on your readme"
+    default: 5
+    required: false
 
-    commit_message:
-        description: "Message that will be used while commiting"
-        default: "Update AniList activity in README.md"
-        required: false
+  commit_message:
+    description: "Message that will be used while commiting"
+    default: "Update AniList activity in README.md"
+    required: false
 
-    commit_username:
-        description: "The username of the commiter"
-        default: "GitHub Action"
-        required: false
+  commit_username:
+    description: "The username of the commiter"
+    default: "GitHub Action"
+    required: false
 
-    commit_email:
-        description: "Email address of the commiter"
-        default: "action@github.com"
-        required: false
-    preferred_language:
-        description: "Preffered language of the list content"
-        default: "english"
-        required: true
+  commit_email:
+    description: "Email address of the commiter"
+    default: "action@github.com"
+    required: false
+
+  preferred_language:
+    description: "Preffered language of the list content"
+    default: "english"
+    required: false
+
+  timezone:
+    description: "Timezone of the list content (e.g. Europe/Berlin)"
+    default: "UTC"
+    required: false
+
+  date_format:
+    description: "Date format of the list content (e.g. {D}/{M or MW}/{Y} {h}:{m})"
+    default: "{h}:{m} {D} {MW} {Y}"
+    required: false
 
 runs:
-    using: "composite"
-    steps:
-        - name: Install dependencies
-          run: |
-              python -m pip install --upgrade pip
-              pip install -r ${{ github.action_path }}/requirements.txt
-          shell: bash
-        - name: Run the script
-          run: |
-              python ${{ github.action_path }}/
-          shell: bash
-          env:
-              INPUT_USER_ID: ${{ inputs.user_id }}
-              INPUT_PREFERRED_LANGUAGE: ${{ inputs.preferred_language }}
-              INPUT_MAX_POST_COUNT: ${{ inputs.max_post_count }}
-              INPUT_README_PATH: ${{ inputs.readme_path }}
-              INPUT_COMMIT_MESSAGE: ${{ inputs.commit_message }}
-              INPUT_GH_TOKEN: ${{ inputs.gh_token }}
-              INPUT_COMMIT_EMAIL: ${{ inputs.commit_email }}
-              INPUT_COMMIT_USERNAME: ${{ inputs.commit_username }}
+  using: "composite"
+  steps:
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r ${{ github.action_path }}/requirements.txt
+      shell: bash
+    - name: Run the script
+      run: |
+        python ${{ github.action_path }}/
+      shell: bash
+      env:
+        INPUT_USER_ID: ${{ inputs.user_id }}
+        INPUT_PREFERRED_LANGUAGE: ${{ inputs.preferred_language }}
+        INPUT_MAX_POST_COUNT: ${{ inputs.max_post_count }}
+        INPUT_README_PATH: ${{ inputs.readme_path }}
+        INPUT_COMMIT_MESSAGE: ${{ inputs.commit_message }}
+        INPUT_GH_TOKEN: ${{ inputs.gh_token }}
+        INPUT_COMMIT_EMAIL: ${{ inputs.commit_email }}
+        INPUT_COMMIT_USERNAME: ${{ inputs.commit_username }}
 
 branding:
-    icon: "activity"
-    color: "purple"
+  icon: "activity"
+  color: "purple"

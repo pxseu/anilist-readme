@@ -39,15 +39,17 @@ def open_readme(readme: str) -> "list[str]":
         return opened.splitlines()
 
 
-def update_readme(readme_content: "list[str]", readme_path: str, activity_list: "list[ListActivity]") -> None:
+def update_readme(
+    readme_content: "list[str]", readme_path: str, activity_list: "list[ListActivity]"
+) -> None:
     """
     Update the readme file with the given contents.
     """
     logger.info("Updating the readme contents...")
 
     if environ.get("DEV") == "true":
-        # if we are in dev mode, we don't commit
-        return
+        # if we are in dev mode, write to a new file
+        readme_path += ".dev"
 
     start_index, end_index = readme_comment_indexes(readme_content)
     top_part = "\n".join(readme_content[: start_index + 1])
