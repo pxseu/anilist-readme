@@ -7,7 +7,7 @@ from .config import EMOJI_DICT
 
 
 class Language(Enum):
-    romanji = auto()
+    romaji = auto()
     english = auto()
     native = auto()
 
