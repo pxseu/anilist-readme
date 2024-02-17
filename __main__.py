@@ -1,5 +1,5 @@
 from anilist_readme.actions_utils import actions_input, add_secret
-from anilist_readme.config import ANILIST_QUERY
+from anilist_readme.config import LIST_QUERY, USERNAME_QUERY
 from anilist_readme.git import git_add_commit_push
 from anilist_readme.graphql import grapql
 from anilist_readme.list_activity import ListActivity, validate_language
@@ -20,8 +20,10 @@ def main(
 ):
     language = validate_language(preferred_language)
 
+    user_id = user_id or grapql(USERNAME_QUERY, {"name": user_name})["data"]["User"]["id"]
+
     response = grapql(
-        ANILIST_QUERY, {"id": int(user_id), "post_count": int(max_post_count)}
+        LIST_QUERY, {"id": int(user_id), "post_count": int(max_post_count)}
     )
     parsed = [
         ListActivity(activity, timezone, language, date_format)
@@ -37,7 +39,11 @@ def main(
 
 if __name__ == "__main__":
     readme_path = actions_input("README_PATH", optional=True) or find_readme()
-    user_id = actions_input("USER_ID", optional=False) or "0"
+    user_id = actions_input("USER_ID", optional=True)
+    user_name = actions_input("USER_NAME", optional=True)
+    
+    if not user_id and not user_name:
+        raise ValueError("USER_ID or USER_NAME must be provided")
 
     max_post_count = actions_input("MAX_POST_COUNT", optional=True) or "5"
     commit_message = (

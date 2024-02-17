@@ -11,7 +11,7 @@ def find_readme():
     Find the readme file in the given current directory.
     """
     logger.info("Searching for the readme file...")
-    readme_path = None
+    readme_path = None    
 
     for root, _, files in walk(".", topdown=True):
         for file in files:
@@ -34,7 +34,7 @@ def open_readme(readme: str) -> "list[str]":
     """
     logger.info(f"Opening readme in '{readme}'")
 
-    with open(readme, "r") as file:
+    with open(readme, "r", encoding="utf-8") as file:
         opened = file.read()
         return opened.splitlines()
 
@@ -55,7 +55,7 @@ def update_readme(
     top_part = "\n".join(readme_content[: start_index + 1])
     bottom_part = "\n".join(readme_content[end_index:])
 
-    with open(readme_path, "w") as file:
+    with open(readme_path, "w", encoding="utf-8") as file:
         new_content = (
             top_part
             + "\n\n"

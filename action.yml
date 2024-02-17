@@ -5,8 +5,10 @@ description: "Puts your newest activity from AniList into your readme"
 inputs:
   user_id:
     description: "Your anilist user id"
-    default: ""
-    required: true
+    required: false
+  user_name:
+    description: "Your anilist username"
+    required: false
 
   gh_token:
     description: "GitHub access token with Repo scope"
@@ -66,6 +68,7 @@ runs:
       shell: bash
       env:
         INPUT_USER_ID: ${{ inputs.user_id }}
+        INPUT_USER_NAME: ${{ inputs.user_name }}
         INPUT_PREFERRED_LANGUAGE: ${{ inputs.preferred_language }}
         INPUT_MAX_POST_COUNT: ${{ inputs.max_post_count }}
         INPUT_README_PATH: ${{ inputs.readme_path }}

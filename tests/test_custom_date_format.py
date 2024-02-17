@@ -1,6 +1,6 @@
 import unittest
 from dateutil import tz
-from datetime import datetime, tzinfo
+from datetime import datetime
 from anilist_readme.list_activity import custom_datetime_format
 
 
@@ -19,7 +19,7 @@ class TestCustomDatetimeFormat(unittest.TestCase):
         )
 
     def test_custom_datetime_format_without_tz(self):
-        date = datetime.utcfromtimestamp(1667059380)
+        date = datetime.fromtimestamp(1667059380, tz.gettz("UTC"))
 
         self.assertEqual(
             custom_datetime_format(date, "{h}:{m} {D} {MW} {Y}"),

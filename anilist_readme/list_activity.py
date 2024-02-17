@@ -1,6 +1,5 @@
 from datetime import datetime, tzinfo
 from enum import auto, Enum
-from typing import Optional
 from dateutil import tz
 
 from .config import EMOJI_DICT
@@ -17,8 +16,8 @@ def validate_language(lang: str) -> Language:
     Check if the language is valid.
     """
     languages = [x.name for x in Language]
-    if lang in languages:
-        return Language[lang]
+    if lang.lower() in languages:
+        return Language[lang.lower()]
     raise ValueError(
         f"'{lang}'' is not a valid language. Must be: '{', '.join(languages)}'"
     )
@@ -44,6 +43,7 @@ class ListActivity:
                 preferred_lang.name if preferred_lang else "english"
             ]
             or activity_data["media"]["title"]["romaji"]
+            or activity_data["media"]["title"]["native"]
         )
         self.url: str = activity_data["media"]["siteUrl"]
 

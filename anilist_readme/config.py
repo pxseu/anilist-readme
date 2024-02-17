@@ -1,5 +1,5 @@
 ANILIST_ENDPOINT = "https://graphql.anilist.co"
-ANILIST_QUERY = """query ($id: Int, $post_count: Int) {
+LIST_QUERY = """query ($id: Int, $post_count: Int) {
     Page(page: 1, perPage: $post_count) {
         activities(userId: $id, sort: ID_DESC, type: MEDIA_LIST) {
             ... on ListActivity {
@@ -17,6 +17,11 @@ ANILIST_QUERY = """query ($id: Int, $post_count: Int) {
                 }
             }
         }
+    }
+}"""
+USERNAME_QUERY = """query ($name: String) {
+    User(name: $name) {
+        id
     }
 }"""
 
