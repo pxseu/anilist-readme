@@ -1,6 +1,6 @@
 from anilist_readme.actions_utils import actions_input, add_secret
 from anilist_readme.config import LIST_QUERY, USERNAME_QUERY
-from anilist_readme.git import git_add_commit_push
+from anilist_readme.git import git_add_commit_push, git_check_activity
 from anilist_readme.graphql import grapql
 from anilist_readme.list_activity import ListActivity, validate_language
 from anilist_readme.readme_actions import find_readme, open_readme, update_readme
@@ -31,10 +31,11 @@ def main(
     ]
     readme = open_readme(readme_path)
     update_readme(readme, readme_path, parsed)
-    add_secret(gh_token)
     git_add_commit_push(
         readme_path, commit_message, gh_token, commit_email, commit_username
     )
+
+    git_check_activity(gh_token, commit_email, commit_username)
 
 
 if __name__ == "__main__":

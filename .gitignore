@@ -3,3 +3,5 @@ __pycache__
 .vscode
 README.md.dev
 venv/
+.venv/
+.direnv/

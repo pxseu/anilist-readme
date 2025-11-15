@@ -85,3 +85,16 @@ The query above will return your username and your id which you can use for this
 ## Example
 
 You can find it on my [profile](https://github.com/pxseu/pxseu/blob/a2980f3165f0ed86d5469ee35b8ff38e12116794/README.md)!
+
+## Development
+
+`nix develop` to enter the development environment.
+Or if you use direnv, you can use `direnv allow` to allow the development environment.
+
+Then, you can use the following command to run the tests:
+
+```bash
+./test.sh
+```
+
+This script will run the tests and then run the action with the default settings.
