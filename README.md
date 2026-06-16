@@ -37,7 +37,7 @@ jobs:
     name: Update this repo's README with latest AniList activites
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: AniList readme workflow
         uses: pxseu/anilist-readme@senpai # latest version
         with:
